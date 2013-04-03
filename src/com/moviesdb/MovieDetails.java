@@ -105,6 +105,25 @@ public class MovieDetails extends HttpServlet {
                  out.println("</table>");
                  
                  /*
+                  * Quotes
+                  */
+            	 query = "SELECT q.characterName, q.quote " +
+            			 "FROM quotes q, movies m " +
+            			 "Where m.mid =q.mid and m.mid = '" + mid +"'";
+
+            	 
+            	 r = s.executeQuery(query);
+            	 
+            	 out.println("<h2>Quotes from the movie</h2>");
+            	 while(r.next()) {
+                	 out.println(r.getString(1) + ": " + r.getString(2));
+                 }
+                 out.println("</table>");
+                 
+                 // divider line
+                 out.println("</br><hr>");
+                 
+                 /*
                   * Friends Ratings of this movie
                   */
             	 query = "SELECT u.firstname, u.lastname, u.email, r.rating, r.comments " +
@@ -120,7 +139,7 @@ public class MovieDetails extends HttpServlet {
             	 
             	 r = s.executeQuery(query);
             	 
-            	 out.println("<h3>Friends of Mine</h3>");
+            	 out.println("<h3>Friends of mine who have rated this movie:</h3>");
             	 out.println("<table border=\"1\">");
                  out.println("<tr>" +
 								"<th>First Name</th>" +
@@ -141,6 +160,45 @@ public class MovieDetails extends HttpServlet {
                      out.println("</tr>");   
                  }
                  out.println("</table>");
+                 
+                 
+                 // divider line
+                 out.println("</br><hr>");
+                 
+                 /*
+                  * Where is this movie playing?
+                  */
+            	 query = "SELECT t.theaterName, t.address, t.city, t.state, t.zip, p.perfDateTime " + 
+            			 "FROM theaters t, movies m, playingat p " +
+            			 "WHERE t.tid = p.tid AND m.mid = '" + mid + "' AND m.mid = p.mid";
+            	 
+            	 r = s.executeQuery(query);
+            	 
+            	 out.println("<h3>Where is the movie playing?</h3>");
+            	 while(r.next()) {
+                	 out.println("Theater Name: " + r.getString(1) + "</br>");
+                	 out.println("Theater Address: " + r.getString(2) + ", " + r.getString(3) + ", " + r.getString(4) + " " + r.getString(5) + "</br>");
+                	 out.println("Date/Time: " + r.getTimestamp(6) + "</br>");
+                 }
+                 out.println("</table>");
+                 
+                 /*
+                  * Where can you rent it?
+                  */
+            	 query = "SELECT rs.serviceName, rs.sURL, rs.description, r.availFrom, r.availTo, r.price " + 
+						 "FROM rentavailablefrom r, movies m, rentalservice rs " +
+						 "WHERE rs.rid = r.rid AND m.mid = r.mid AND m.mid = '" + mid + "'";
+            	 
+            	 r = s.executeQuery(query);
+            	 out.println("<h3>Where can you rent this movie?</h3>");
+            	 while(r.next()) {
+                	 out.println("Service: <a href=\"" + r.getString(2) + "\">" + r.getString(1) + "</a></br>");
+                	 out.println("Description of Service: " + r.getString(3) + "</br>");
+                	 out.println("Available: " + r.getTimestamp(4) + " to " + r.getTimestamp(5) + "</br>");
+                	 out.println("Price: $" + r.getString(6) + "</br>");
+                 }
+                 out.println("</table>");
+            	 
             	 
                  /*
                   * close connections
@@ -148,6 +206,8 @@ public class MovieDetails extends HttpServlet {
                  r.close();
                  s.close();
                  conn.close();
+                 
+                 
          }
          catch (Exception e) {
                  out.println("The database could not be accessed.<br>");
