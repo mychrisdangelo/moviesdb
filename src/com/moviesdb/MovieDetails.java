@@ -115,7 +115,7 @@ public class MovieDetails extends HttpServlet {
             	 
             	 out.println("<h3>Quotes from the movie</h3>");
             	 while(r.next()) {
-                	 out.println(r.getString(1) + ": " + r.getString(2));
+                	 out.println(r.getString(1) + ": " + r.getString(2) + "</br>");
                  }
                  out.println("</table>");
                  
