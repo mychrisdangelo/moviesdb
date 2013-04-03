@@ -54,16 +54,55 @@ public class MovieDetails extends HttpServlet {
                  Connection conn = ods.getConnection();
                  Statement s = conn.createStatement();
                  ResultSet r = s.executeQuery(query);
-       
+
+                 /*
+                  * Basic Movie Details
+                  */
+                 out.println("<h1>Movie Details</h1>");
                  while(r.next()) {
                 	 out.println("Title: " + r.getString(1) + "</br>");
                 	 out.println("Running Time: " + r.getString(3) + "</br>");
                 	 out.println("Synopsis: " + r.getString(2) + "</br>");
                 	 out.println("Country: " + r.getString(4) + "</br>");
                 	 out.println("Language: " + r.getString(5) + "</br>");
-                	 out.println("Release Date: " + r.getDate(6) + "</br>");
+                	 out.println("Release Date: " + r.getDate(6) + "</br>");	
 
                  }
+                 
+                 /*
+                  * People that worked on the movie
+                  */
+            	 query = "select c.firstname, c.lastname, w.characterName, w.jobCategory, w.jobTitle, c.cid " +
+            	 		 "from workedin w, castcrew c " +
+            			 "where w.mid='" + mid + "' and w.cid = c.cid " +
+            	 		 "order by w.billingNum";
+            	 
+            	 r = s.executeQuery(query);
+            	 
+            	 out.println("<h2>People that worked on this movie</h2>");
+            	 out.println("<table border=\"1\">");
+                 out.println("<tr>" +
+								"<th>First Name</th>" +
+								"<th>Last Name</th>" +
+								"<th>Character Name</th>" +
+								"<th>Job Category</th>" +
+								"<th>Job Title</th>" +
+								"<th>Link to Cast/Crew Page</th>" +
+								"</tr>");
+            	 while(r.next()) {
+                     out.println("<tr>");
+                     out.println("<td>" + r.getString(1) + "</td>");
+                     out.println("<td>" + r.getString(2) + "</td>");
+                     out.println("<td>" + r.getString(3) + "</td>");
+                     out.println("<td>" + r.getString(4) + "</td>");
+                     out.println("<td>" + r.getString(5) + "</td>");                     
+                     out.println("<td><form action='castandcrew' method='get' enctype='text/plain'>" + 
+                  		   	   "<input type='submit' name='cid' value=" +
+                  		       "'" + r.getString(6) + "'/> </td>");
+                     out.println("</tr>");   
+                 }
+                 out.println("</table>");
+            	 		 
                  r.close();
                  s.close();
                  conn.close();
