@@ -30,14 +30,14 @@ public class Movies extends HttpServlet {
                         String query = new String();
                         Statement s = conn.createStatement();
 
-                        query = "select title from movies";
+                        query = "select mid, title from movies";
 
                         ResultSet r = s.executeQuery(query);
                         
                         out.println("Movies A-Z </br>");
                         while(r.next()) {
-                           out.println(r.getString(1) + "<form action='moviedetails' method='get' enctype='text/plain'>" + 
-                        		   "<input type='submit' name='button' value=" +
+                           out.println(r.getString(2) + "<form action='moviedetails' method='get' enctype='text/plain'>" + 
+                        		   "<input type='submit' name='mid' value=" +
                         		   "'" + r.getString(1) + "'/> </br>");
                         }
                         r.close();

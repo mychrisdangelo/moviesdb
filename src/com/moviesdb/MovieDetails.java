@@ -32,22 +32,20 @@ public class MovieDetails extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		
 		 response.setContentType("text/html");
          PrintWriter out = response.getWriter();
-         out.println("test!!!!");
-         String keyName = request.getParameter("button");
-         out.println(keyName);
-         
-         response.setContentType("text/html");
-
+         String mid = request.getParameter("mid");
+      
          String dbUser = "cd2665"; // enter your username here
          String dbPassword = "movies"; // enter your password here
          
-         String query = "SELECT m.title " + 
-        		 "FROM movies m, castcrew c, workedin w " +
-        		 "WHERE m.mid = w.mid AND w.cid = c.cid AND c.firstname = 'Harrison' AND c.lastname = 'Ford';";
-
+         String query =  new String();
+         query = "select m.title, m.synopsis , m.runningTime, m.country, m.language, m.releaseDate " + 
+        		 "from movies m " +
+        		 "where m.mid='" + mid + "'";
+         
          try {
                  OracleDataSource ods = new oracle.jdbc.pool.OracleDataSource();
                  ods.setURL("jdbc:oracle:thin:@//w4111g.cs.columbia.edu:1521/ADB");
@@ -57,13 +55,15 @@ public class MovieDetails extends HttpServlet {
                  Connection conn = ods.getConnection();
                  Statement s = conn.createStatement();
                  ResultSet r = s.executeQuery(query);
-                 
-                 out.println("Movie Name: " + keyName + "</br>");
-                 out.println("Test: MOVIES HARRISON FORD ARE IN</br>");
-               
+       
                  while(r.next()) {
-                	 String movieTitle = r.getString(1);
-                	 out.println("movieTitle: " + movieTitle);
+                	 out.println("Title: " + r.getString(1) + "</br>");
+                	 out.println("Running Time: " + r.getString(3) + "</br>");
+                	 out.println("Synopsis: " + r.getString(2) + "</br>");
+                	 out.println("Country: " + r.getString(4) + "</br>");
+                	 out.println("Language: " + r.getString(5) + "</br>");
+                	 out.println("Release Date: " + r.getDate(6) + "</br>");
+
                  }
                  r.close();
                  s.close();
