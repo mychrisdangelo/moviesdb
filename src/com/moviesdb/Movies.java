@@ -15,11 +15,7 @@ public class Movies extends HttpServlet {
 
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                int i = 0;
-                
-                //String dbUser = "NOONESNAMEISTHIS";
-               // String dbUser = "scott"; // enter your username here
-                //String dbPassword = "tiger"; // enter your password here
+
                 String dbUser = "cd2665"; // enter your username here
                 String dbPassword = "movies"; // enter your password here
 

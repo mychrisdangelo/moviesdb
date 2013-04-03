@@ -33,8 +33,6 @@ public class MovieDetails extends HttpServlet {
          out.println("Movie Details </br>");
          String keyName = request.getParameter("button");
          out.println(keyName);
-         
-         
 	}
 
 	/**
