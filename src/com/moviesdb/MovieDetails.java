@@ -36,6 +36,7 @@ public class MovieDetails extends HttpServlet {
 		 response.setContentType("text/html");
          PrintWriter out = response.getWriter();
          String mid = request.getParameter("mid");
+         String email = "chris.dangelo@gmail.com"; // TODO = request.getParamater("email");
       
          String dbUser = "cd2665"; // enter your username here
          String dbPassword = "movies"; // enter your password here
@@ -102,7 +103,48 @@ public class MovieDetails extends HttpServlet {
                      out.println("</tr>");   
                  }
                  out.println("</table>");
-            	 		 
+                 
+                 /*
+                  * Friends Ratings of this movie
+                  */
+            	 query = "SELECT u.firstname, u.lastname, u.email, r.rating, r.comments " +
+            			 "FROM users u, rated r " +
+            			 "WHERE r.mid = '" + mid + "' AND r.email = u.email AND r.email IN (" +
+	            			 "SELECT f.friendsBEmail " +
+	            			 "FROM friendswith f " +
+	            			 "WHERE f.friendsAEmail = '" + email + "' " +
+	            			 "UNION " +
+		            			 "SELECT f1.friendsAEmail " + 
+		            			 "FROM friendswith f1 " +
+		            			 "WHERE f1.friendsBEmail = '" + email + "')";
+            	 
+            	 r = s.executeQuery(query);
+            	 
+            	 out.println("<h3>Friends of Mine</h3>");
+            	 out.println("<table border=\"1\">");
+                 out.println("<tr>" +
+								"<th>First Name</th>" +
+								"<th>Last Name</th>" +
+								"<th>Rating of Movie</th>" +
+								"<th>Comments</th>" +
+								"<th>Link to Profile Page</th>" +
+								"</tr>");
+            	 while(r.next()) {
+                     out.println("<tr>");
+                     out.println("<td>" + r.getString(1) + "</td>");
+                     out.println("<td>" + r.getString(2) + "</td>");
+                     out.println("<td>" + r.getString(4) + "</td>");
+                     out.println("<td>" + r.getString(5) + "</td>");
+                     out.println("<td><form action='castandcrew' method='get' enctype='text/plain'>" + 
+                  		   	   "<input type='submit' name='cid' value=" +
+                  		       "'" + r.getString(3) + "'/> </td>");
+                     out.println("</tr>");   
+                 }
+                 out.println("</table>");
+            	 
+                 /*
+                  * close connections
+                  */
                  r.close();
                  s.close();
                  conn.close();

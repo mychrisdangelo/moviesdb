@@ -38,7 +38,7 @@ public class Movies extends HttpServlet {
 
                         ResultSet r = s.executeQuery(query);
                         
-                        out.println("Movies A-Z </br>");
+                        out.println("<h1>Movies A-Z </h1>");
                         out.println("<table border=\"1\">");
                         out.println("<tr>" +
 									"<th>Movie Title</th>" +
