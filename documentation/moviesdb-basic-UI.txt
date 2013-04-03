@@ -1,0 +1,114 @@
+1st Page
+
+	Login
+	Email: 
+	Password:
+
+	Create New Account:
+	**********
+	Enter email:
+	Enter Password:
+
+	LOGIN BUTTON
+
+1.5th Page:
+
+	If user enters in wrong login name/password this page
+	prints
+	"wrong username/password"
+	
+	If user enters in already used email this page 
+	prints
+	"username already used"
+
+	<link to login page>
+
+2nd Page:
+
+	Links
+	********
+	List of Movies A-Z
+	List of Cast/Crew A-Z
+
+	Profile
+	******
+	Username: chris.dangelo@gmail.com
+	Name:	  Chris D'Angelo
+	******
+	Movies I've seen:
+		1. Annie Hall <link to movie>
+		2. Jurassic Park <link to movie>
+	******
+	Movies I've rated:
+		1. Annie Hall <link to movie>
+		2. Star Wars <link to movie>
+	******
+	My Friends:
+		1. Xin Du <link to profile>
+
+	*******
+	Recommendations (list of movies I haven't seen, but
+			 friends have rated > 3):
+		1. Back to the Future (3.0 by Xin)
+		2. Back to the Future 2 (4.0 by Xin)
+
+
+List of Movies A-Z PAGE:
+	
+	Movies:
+		1. Annie Hall <link to movie details>
+		2. Jurassic Park <link to movie details>
+
+		...
+
+		10. Back to the Future <link to movie details>
+
+List of Cast/Crew A-Z PAGE:
+
+	Cast/Crew:
+		1. AAAA BBBB <Link to Actor Detail Page>
+		2. CCCC DDD <Link to Actor Detail Page>
+		3. EEEE FFFF <link to Actor Detail Page>
+
+Movie Detail Page:
+
+	Movie Name:		Jurassic Park
+	Movie Average Rating:	6.7
+	Would you like to rate this movie?
+		USER INPUTS RATING 
+		<if user has already rated movie
+		 this rating changes previou rating
+		 of the movie>
+
+	Cast/Crew in this movie:
+		1. Stephen Speilberg (director)
+		...
+	
+	Friends Ratings of this Movies:
+		1. Xin 5.6
+	Where is Playing:
+		1. 42nd street 8pm
+	Where can it be rented:
+		1. Netflix
+	Quotes from this movies:
+		1. Person said: "XXXXX"
+
+Cast/Crew Detail Page
+
+	Cast/Crew Name:		Woody Allen
+	Average Rating:		4.5
+	Would you like to rate this cast/crew member?
+		USER INPUTS RATING
+		<if user has already rated cast/crew
+		 this rating changes previou rating
+		 of the movie>
+			
+	Their Movies:
+		1. Annie Hall <link to movie details>
+	Friends Ratings of this Person
+		1. Xin 2.5 <link to profile page>
+
+
+
+	
+	

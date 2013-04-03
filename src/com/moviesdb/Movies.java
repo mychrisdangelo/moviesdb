@@ -7,7 +7,7 @@ import java.sql.*;
 import oracle.jdbc.*;
 import oracle.jdbc.pool.*;
 
-public class Sample extends HttpServlet {
+public class Movies extends HttpServlet {
 
         public void doGet (HttpServletRequest request,
                         HttpServletResponse response)
@@ -15,7 +15,7 @@ public class Sample extends HttpServlet {
 
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                
+                int i = 0;
                 
                 //String dbUser = "NOONESNAMEISTHIS";
                // String dbUser = "scott"; // enter your username here
@@ -36,16 +36,16 @@ public class Sample extends HttpServlet {
 
                         query = "select title from movies";
 
-                         ResultSet r = s.executeQuery(query);
-                         while(r.next()){
-                           out.println("Query Items: "+r.getString(1)+"</br>"+ "<form action='character' method='get' enctype='text/plain'><input type='submit' name='button' value=" +
-                           		"'"+r.getString(1)+"' />");
-                           out.println();
-                         }
+                        ResultSet r = s.executeQuery(query);
+                        
+                        out.println("Movies A-Z </br>");
+                        while(r.next()) {
+                           out.println(r.getString(1) + "<form action='moviedetails' method='get' enctype='text/plain'>" + 
+                        		   "<input type='submit' name='button' value=" +
+                        		   "'" + r.getString(1) + "'/> </br>");
+                        }
                         r.close();
                         s.close();
-
-
                         conn.close();
 
                 }

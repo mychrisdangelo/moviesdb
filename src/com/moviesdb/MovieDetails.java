@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Test1
  */
-public class Test1 extends HttpServlet {
+public class MovieDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Test1() {
+    public MovieDetails() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +30,7 @@ public class Test1 extends HttpServlet {
 		// TODO Auto-generated method stub
 		 response.setContentType("text/html");
          PrintWriter out = response.getWriter();
-         out.println("test!!!!");
+         out.println("Movie Details </br>");
          String keyName = request.getParameter("button");
          out.println(keyName);
          
