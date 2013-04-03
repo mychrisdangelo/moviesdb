@@ -4,12 +4,16 @@ import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.*;
 import java.sql.*;
-import oracle.jdbc.*;
 import oracle.jdbc.pool.*;
 
 public class Movies extends HttpServlet {
 
-        public void doGet (HttpServletRequest request,
+        /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+		public void doGet (HttpServletRequest request,
                         HttpServletResponse response)
         throws ServletException, IOException {
 
