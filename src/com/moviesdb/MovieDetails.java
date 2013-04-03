@@ -177,7 +177,7 @@ public class MovieDetails extends HttpServlet {
             	 while(r.next()) {
                 	 out.println("Theater Name: " + r.getString(1) + "</br>");
                 	 out.println("Theater Address: " + r.getString(2) + ", " + r.getString(3) + ", " + r.getString(4) + " " + r.getString(5) + "</br>");
-                	 out.println("Date/Time: " + r.getTimestamp(6) + "</br>");
+                	 out.println("Date/Time: " + r.getTimestamp(6) + "</br></br>");
                  }
                  out.println("</table>");
                  
