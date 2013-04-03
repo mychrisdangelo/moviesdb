@@ -59,9 +59,8 @@ public class MovieDetails extends HttpServlet {
                  /*
                   * Basic Movie Details
                   */
-                 out.println("<h1>Movie Details</h1>");
                  while(r.next()) {
-                	 out.println("Title: " + r.getString(1) + "</br>");
+                	 out.println("<h1>" + r.getString(1) + "</h1>");
                 	 out.println("Running Time: " + r.getString(3) + "</br>");
                 	 out.println("Synopsis: " + r.getString(2) + "</br>");
                 	 out.println("Country: " + r.getString(4) + "</br>");
@@ -80,7 +79,7 @@ public class MovieDetails extends HttpServlet {
             	 
             	 r = s.executeQuery(query);
             	 
-            	 out.println("<h2>People that worked on this movie</h2>");
+            	 out.println("<h3>People that worked on this movie</h3>");
             	 out.println("<table border=\"1\">");
                  out.println("<tr>" +
 								"<th>First Name</th>" +
@@ -114,7 +113,7 @@ public class MovieDetails extends HttpServlet {
             	 
             	 r = s.executeQuery(query);
             	 
-            	 out.println("<h2>Quotes from the movie</h2>");
+            	 out.println("<h3>Quotes from the movie</h3>");
             	 while(r.next()) {
                 	 out.println(r.getString(1) + ": " + r.getString(2));
                  }

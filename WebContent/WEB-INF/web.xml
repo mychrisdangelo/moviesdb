@@ -17,7 +17,6 @@
     <servlet-name>movies</servlet-name>
     <url-pattern>/movies</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>moviedetails</servlet-name>
     <servlet-class>
@@ -28,5 +27,14 @@
     <servlet-name>moviedetails</servlet-name>
     <url-pattern>/moviedetails</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>castandcrew</servlet-name>
+    <servlet-class>
+			com.moviesdb.CastAndCrew
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>castandcrew</servlet-name>
+    <url-pattern>/castandcrew</url-pattern>
+  </servlet-mapping>
 </web-app>
