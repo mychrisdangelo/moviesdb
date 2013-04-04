@@ -46,6 +46,11 @@ public class Profile extends HttpServlet {
         out.println("<form action='castandcrew' method='get' enctype='text/plain'>" +
         		"<input type=\"submit\" name=\"loggedinemail\" value=\"" + loggedinemail + "\"></form>");      
         
+        // divider line
+        out.println("</br><hr>");
+        
+        out.println("<h1>XXXX YYYYY Profile</h1>");
+        
         if (visitingemail_received != null) {
 	        String visitingemail = visitingemail_received[0];
 	        out.println("email from movie/details: " + visitingemail + "</br>");
