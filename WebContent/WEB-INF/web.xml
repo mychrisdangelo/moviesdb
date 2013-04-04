@@ -37,4 +37,14 @@
     <servlet-name>castandcrew</servlet-name>
     <url-pattern>/castandcrew</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>profile</servlet-name>
+    <servlet-class>
+			com.moviesdb.Profile
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>profile</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
 </web-app>

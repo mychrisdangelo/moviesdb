@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CastAndCrew
+ * Servlet implementation class Profile
  */
-@WebServlet("/CastAndCrew")
-public class CastAndCrew extends HttpServlet {
+@WebServlet("/Profile")
+public class Profile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CastAndCrew() {
+    public Profile() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +30,15 @@ public class CastAndCrew extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        String cid = request.getParameter("cid");
-        System.out.println("cid: " + cid);
+        String email = request.getParameter("email");
+        System.out.println("email: " + email);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
 	}
 
 }

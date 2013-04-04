@@ -153,8 +153,8 @@ public class MovieDetails extends HttpServlet {
                      out.println("<td>" + r.getString(2) + "</td>");
                      out.println("<td>" + r.getString(4) + "</td>");
                      out.println("<td>" + r.getString(5) + "</td>");
-                     out.println("<td><form action='castandcrew' method='get' enctype='text/plain'>" + 
-                  		   	   "<input type='submit' name='cid' value=" +
+                     out.println("<td><form action='profile' method='get' enctype='text/plain'>" + 
+                  		   	   "<input type='submit' name='email' value=" +
                   		       "'" + r.getString(3) + "'/> </td>");
                      out.println("</tr>");   
                  }
