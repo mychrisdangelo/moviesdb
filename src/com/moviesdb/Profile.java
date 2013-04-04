@@ -49,12 +49,16 @@ public class Profile extends HttpServlet {
         // divider line
         out.println("</br><hr>");
         
-        out.println("<h1>XXXX YYYYY Profile</h1>");
+        out.println("<h1>AAAAAA BBBBBBB Profile</h1>");
         
         if (visitingemail_received != null) {
+        	
 	        String visitingemail = visitingemail_received[0];
-	        out.println("email from movie/details: " + visitingemail + "</br>");
-	        out.println("If Visiting email is not null then this person is logged in and visiting someone elses profile");
+	        // divider line
+	        out.println("</br><hr>");
+	        out.println("<h1>XXXX YYYYY Profile</h1>");
+	        out.println("VISITING EMAIL: " + visitingemail + "</br>");
+	        out.println("The profile of the friend should show instead of the current user.");
         }
         
 	}
