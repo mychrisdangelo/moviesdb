@@ -72,7 +72,11 @@ public class MovieDetails extends HttpServlet {
                  /*
                   * Your Rating for this movie
                   */
+                 query = "select r.rating from rated r where r.email = '" + email + 
+          			   	"' AND r.mid = '" + mid+ "'";
+                 r = s.executeQuery(query);
                  out.println("<h3>Rate this movie:</h3>");
+                 out.println("Currently rating by you: " + (r.next() ? r.getString(1) : "none") + "</br>");
                  out.println("" +
                  "<form action=\"ratedmovie\"> " +
                  "<select name=\"rating\"> " +
