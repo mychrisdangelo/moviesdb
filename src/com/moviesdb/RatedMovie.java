@@ -60,25 +60,36 @@ public class RatedMovie extends HttpServlet {
             /*
              * Update rating if rating already exits
              */
-            
+            int count = 0;
             while(r.next()) {
             	r.updateFloat(1, Float.valueOf(rating[0]));
             	r.updateRow();
+            	count++;
             }
             
             /*
              * If rating didn't exist insert it
              */
-            
-            query = "select count(*) from rated r where r.email = '" + email[0] + 
-     			   	"' AND r.mid = '" + mid[0]+ "'";
+            if (count == 0) {
+	            query = "select r.rating, r.mid, r.email from rated r where r.email = '" + email[0] + 
+	     			   	"' AND r.mid = '" + mid[0]+ "'";
+	            
+	            r = s.executeQuery(query);
+	            
+	            r.moveToInsertRow();
+	            r.updateFloat(1, Float.valueOf(rating[0]));
+	            r.updateInt(2, Integer.valueOf(mid[0]));
+	            r.updateString(3, email[0]);
+	            
+	            r.insertRow();
+	            r.beforeFirst();
+            }
             
             /*
              * Notify User
              */
-            
-	        out.println("Email: " + email[0] + "'s rating of: " + rating[0] + 
-        		    " has been updated for the movie id: " + mid[0] + "</br>");
+	        out.println(email[0] + "'s rating of: " + rating[0] + 
+        		    " has been " + ((count == 0) ? "added" : "updated") + " for the movie id: " + mid[0] + "</br>");
 
 	        r.close();
 	        s.close();
