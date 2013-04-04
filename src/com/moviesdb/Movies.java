@@ -19,6 +19,7 @@ public class Movies extends HttpServlet {
 
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
+                String loggedinemail = request.getParameter("loggedinemail");
 
                 String dbUser = "cd2665"; // enter your username here
                 String dbPassword = "movies"; // enter your password here
@@ -33,10 +34,12 @@ public class Movies extends HttpServlet {
 
                         String query = new String();
                         Statement s = conn.createStatement();
-
+                        
                         query = "select mid, title from movies order by title asc";
-
                         ResultSet r = s.executeQuery(query);
+                        
+                        // print logged in name
+                        out.println("<p align=\"right\">Logged in: " + loggedinemail + "</p>");     
                         
                         out.println("<h1>Movies A-Z </h1>");
                         out.println("<table border=\"1\">");
@@ -49,7 +52,9 @@ public class Movies extends HttpServlet {
                            out.println("<td>" + r.getString(2) + "</td>");
                            out.println("<td><form action='moviedetails' method='get' enctype='text/plain'>" + 
                         		   	   "<input type='submit' name='mid' value=" +
-                        		       "'" + r.getString(1) + "'/> </td>");
+                        		       "'" + r.getString(1) + "'/> " +
+                        		   	   "<input type=\"hidden\" value=\"" + loggedinemail + "\" name=\"loggedinemail\">" +
+                        		       "</form></td>");
                            out.println("</tr>");                           
                         }
                         out.println("</table>");

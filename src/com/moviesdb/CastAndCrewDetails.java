@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CastAndCrew
  */
-@WebServlet("/CastAndCrew")
-public class CastAndCrew extends HttpServlet {
+@WebServlet("/CastAndCrewDetails")
+public class CastAndCrewDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CastAndCrew() {
+    public CastAndCrewDetails() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +31,16 @@ public class CastAndCrew extends HttpServlet {
 		response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
-        String loggedinemail = request.getParameter("loggedinemail");
-	
+        // parse URL
+        java.util.Map<String, String[]> submission = request.getParameterMap();
+        String[] loggedinemail_received = submission.get("loggedinemail");
+        String[] cid_received = submission.get("cid");  
+        String cid = cid_received[0];
+        String loggedinemail = loggedinemail_received[0];
+        
         // print logged in name
         out.println("<p align=\"right\">Logged in: " + loggedinemail + "</p>");     
-        
-        out.println("<h1>Cast and Crew A-Z </h1>");
-        
+        out.println("cid from movie/details: " + cid + "</br>");
 	}
 
 	/**

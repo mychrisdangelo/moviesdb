@@ -42,7 +42,7 @@ public class RatedMovie extends HttpServlet {
         java.util.Map<String, String[]> submission = request.getParameterMap();
         String[] rating = submission.get("rating");
         String[] mid = submission.get("mid");
-        String[] email = submission.get("email");
+        String[] email = submission.get("loggedinemail");
 
         
         try {

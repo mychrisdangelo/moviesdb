@@ -31,12 +31,15 @@ public class MovieDetails extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
 		 response.setContentType("text/html");
          PrintWriter out = response.getWriter();
-         String mid = request.getParameter("mid");
-         String email = "chris.dangelo@gmail.com"; // TODO = request.getParamater("email");
+         
+         java.util.Map<String, String[]> submission = request.getParameterMap();
+         String[] mid_received = submission.get("mid");
+         String[] loggedinemail_received = submission.get("loggedinemail");
+         String mid = mid_received[0];
+         String loggedinemail = loggedinemail_received[0]; // "chris.dangelo@gmail.com"; // TODO = request.getParamater("email");
       
          String dbUser = "cd2665"; // enter your username here
          String dbPassword = "movies"; // enter your password here
@@ -56,6 +59,9 @@ public class MovieDetails extends HttpServlet {
                  Statement s = conn.createStatement();
                  ResultSet r = s.executeQuery(query);
 
+                 // print logged in name
+                 out.println("<p align=\"right\">Logged in: " + loggedinemail + "</p>");     
+                 
                  /*
                   * Basic Movie Details
                   */
@@ -68,34 +74,6 @@ public class MovieDetails extends HttpServlet {
                 	 out.println("Release Date: " + r.getDate(6) + "</br>");	
 
                  }
-                 
-                 /*
-                  * Your Rating for this movie
-                  */
-                 query = "select r.rating from rated r where r.email = '" + email + 
-          			   	"' AND r.mid = '" + mid+ "'";
-                 r = s.executeQuery(query);
-                 out.println("<h3>Rate this movie:</h3>");
-                 out.println("Currently rating by you: " + (r.next() ? r.getString(1) : "none") + "</br>");
-                 out.println("" +
-                 "<form action=\"ratedmovie\"> " +
-                 "<select name=\"rating\"> " +
-                   "<option value=\"1\">1</option> " +
-                   "<option value=\"2\">2</option> " +
-                   "<option value=\"3\">3</option> " +
-                   "<option value=\"4\">4</option> " +
-                   "<option value=\"5\">5</option> " +
-                   "<option value=\"6\">6</option> " +
-                   "<option value=\"7\">7</option> " +
-                   "<option value=\"8\">8</option> " +
-                   "<option value=\"9\">9</option> " +
-                   "<option value=\"10\">10</option> " +
-                 "</select> " +
-                 "<input type=\"hidden\" value=\"" + mid + "\" name=\"mid\">" +
-                 "<input type=\"hidden\" value=\"" + email + "\" name=\"email\">" +
-                 "<input type=\"submit\" value=\"Submit\"> " +
-                 "</form> ");
-                 
                  
                  /*
                   * People that worked on the movie
@@ -124,9 +102,11 @@ public class MovieDetails extends HttpServlet {
                      out.println("<td>" + r.getString(3) + "</td>");
                      out.println("<td>" + r.getString(4) + "</td>");
                      out.println("<td>" + r.getString(5) + "</td>");                     
-                     out.println("<td><form action='castandcrew' method='get' enctype='text/plain'>" + 
+                     out.println("<td><form action='castandcrewdetails' method='get' enctype='text/plain'>" + 
                   		   	   "<input type='submit' name='cid' value=" +
-                  		       "'" + r.getString(6) + "'/> </form> </td>");
+                  		       "'" + r.getString(6) + "'/> " + 
+                  		       "<input type=\"hidden\" value=\"" + loggedinemail + "\" name=\"loggedinemail\">" +
+                  		       "</form> </td>");
                      out.println("</tr>");   
                  }
                  out.println("</table>");
@@ -151,6 +131,33 @@ public class MovieDetails extends HttpServlet {
                  out.println("</br><hr>");
                  
                  /*
+                  * Your Rating for this movie
+                  */
+                 query = "select r.rating from rated r where r.email = '" + loggedinemail + 
+          			   	"' AND r.mid = '" + mid+ "'";
+                 r = s.executeQuery(query);
+                 out.println("<h3>Rate this movie:</h3>");
+                 out.println("Currently rating by you: " + (r.next() ? r.getString(1) : "none") + "</br>");
+                 out.println("" +
+                 "<form action=\"ratedmovie\"> " +
+                 "<select name=\"rating\"> " +
+                   "<option value=\"1\">1</option> " +
+                   "<option value=\"2\">2</option> " +
+                   "<option value=\"3\">3</option> " +
+                   "<option value=\"4\">4</option> " +
+                   "<option value=\"5\">5</option> " +
+                   "<option value=\"6\">6</option> " +
+                   "<option value=\"7\">7</option> " +
+                   "<option value=\"8\">8</option> " +
+                   "<option value=\"9\">9</option> " +
+                   "<option value=\"10\">10</option> " +
+                 "</select> " +
+                 "<input type=\"hidden\" value=\"" + mid + "\" name=\"mid\">" +
+                 "<input type=\"hidden\" value=\"" + loggedinemail + "\" name=\"loggedinemail\">" +
+                 "<input type=\"submit\" value=\"Submit\"> " +
+                 "</form> ");
+                 
+                 /*
                   * Friends Ratings of this movie
                   */
             	 query = "SELECT u.firstname, u.lastname, u.email, r.rating, r.comments " +
@@ -158,11 +165,11 @@ public class MovieDetails extends HttpServlet {
             			 "WHERE r.mid = '" + mid + "' AND r.email = u.email AND r.email IN (" +
 	            			 "SELECT f.friendsBEmail " +
 	            			 "FROM friendswith f " +
-	            			 "WHERE f.friendsAEmail = '" + email + "' " +
+	            			 "WHERE f.friendsAEmail = '" + loggedinemail + "' " +
 	            			 "UNION " +
 		            			 "SELECT f1.friendsAEmail " + 
 		            			 "FROM friendswith f1 " +
-		            			 "WHERE f1.friendsBEmail = '" + email + "')";
+		            			 "WHERE f1.friendsBEmail = '" + loggedinemail + "')";
             	 
             	 r = s.executeQuery(query);
             	 

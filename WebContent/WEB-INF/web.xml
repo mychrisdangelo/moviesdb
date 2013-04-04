@@ -38,6 +38,16 @@
     <url-pattern>/castandcrew</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>castandcrewdetails</servlet-name>
+    <servlet-class>
+			com.moviesdb.CastAndCrewDetails
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>castandcrewdetails</servlet-name>
+    <url-pattern>/castandcrewdetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>profile</servlet-name>
     <servlet-class>
 			com.moviesdb.Profile

@@ -31,8 +31,27 @@ public class Profile extends HttpServlet {
 		response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
-        String email = request.getParameter("visitingemail");
-        out.println("email from movie/details: " + email + "</br>");
+        java.util.Map<String, String[]> submission = request.getParameterMap();
+        String[] loggedinemail_received = submission.get("loggedinemail");
+        String[] visitingemail_received = submission.get("visitingemail");
+        
+        
+        String loggedinemail = loggedinemail_received[0];
+        out.println("<p align=\"right\">Logged in: " + loggedinemail + "</p>"); 
+        out.println("Go to Movies A-Z ");
+        out.println("<form action='movies' method='get' enctype='text/plain'>" +
+        		"<input type=\"submit\" name=\"loggedinemail\" value=\"" + loggedinemail + "\"></form>");
+        
+        out.println("Go to Cast & Crew A-Z ");
+        out.println("<form action='castandcrew' method='get' enctype='text/plain'>" +
+        		"<input type=\"submit\" name=\"loggedinemail\" value=\"" + loggedinemail + "\"></form>");      
+        
+        if (visitingemail_received != null) {
+	        String visitingemail = visitingemail_received[0];
+	        out.println("email from movie/details: " + visitingemail + "</br>");
+	        out.println("If Visiting email is not null then this person is logged in and visiting someone elses profile");
+        }
+        
 	}
 
 	/**
