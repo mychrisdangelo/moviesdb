@@ -37,6 +37,21 @@
     <servlet-name>castandcrew</servlet-name>
     <url-pattern>/castandcrew</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ratedcastcrew</servlet-name>
+    <servlet-class>
+			com.moviesdb.RatedCastCrew
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ratedcastcrew</servlet-name>
+    <url-pattern>/ratedcastcrew</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
   <servlet>
     <servlet-name>castandcrewdetails</servlet-name>
     <servlet-class>
