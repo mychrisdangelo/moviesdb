@@ -30,8 +30,9 @@ public class Profile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        String email = request.getParameter("email");
-        System.out.println("email: " + email);
+        
+        String email = request.getParameter("visitingemail");
+        out.println("email from movie/details: " + email + "</br>");
 	}
 
 	/**

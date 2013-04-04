@@ -70,6 +70,30 @@ public class MovieDetails extends HttpServlet {
                  }
                  
                  /*
+                  * Your Rating for this movie
+                  */
+                 out.println("<h3>Rate this movie:</h3>");
+                 out.println("" +
+                 "<form action=\"ratedmovie\"> " +
+                 "<select name=\"rating\"> " +
+                   "<option value=\"1\">1</option> " +
+                   "<option value=\"2\">2</option> " +
+                   "<option value=\"3\">3</option> " +
+                   "<option value=\"4\">4</option> " +
+                   "<option value=\"5\">5</option> " +
+                   "<option value=\"6\">6</option> " +
+                   "<option value=\"7\">7</option> " +
+                   "<option value=\"8\">8</option> " +
+                   "<option value=\"9\">9</option> " +
+                   "<option value=\"10\">10</option> " +
+                 "</select> " +
+                 "<input type=\"hidden\" value=\"" + mid + "\" name=\"mid\">" +
+                 "<input type=\"hidden\" value=\"" + email + "\" name=\"email\">" +
+                 "<input type=\"submit\" value=\"Submit\"> " +
+                 "</form> ");
+                 
+                 
+                 /*
                   * People that worked on the movie
                   */
             	 query = "select c.firstname, c.lastname, w.characterName, w.jobCategory, w.jobTitle, c.cid " +
@@ -154,7 +178,7 @@ public class MovieDetails extends HttpServlet {
                      out.println("<td>" + r.getString(4) + "</td>");
                      out.println("<td>" + r.getString(5) + "</td>");
                      out.println("<td><form action='profile' method='get' enctype='text/plain'>" + 
-                  		   	   "<input type='submit' name='email' value=" +
+                  		   	   "<input type='submit' name='visitingemail' value=" +
                   		       "'" + r.getString(3) + "'/> </form></td>");
                      out.println("</tr>");   
                  }

@@ -47,4 +47,14 @@
     <servlet-name>profile</servlet-name>
     <url-pattern>/profile</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>ratedmovie</servlet-name>
+    <servlet-class>
+			com.moviesdb.RatedMovie
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ratedmovie</servlet-name>
+    <url-pattern>/ratedmovie</url-pattern>
+  </servlet-mapping>
 </web-app>
