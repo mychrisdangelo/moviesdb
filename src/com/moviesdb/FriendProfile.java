@@ -33,6 +33,7 @@ public class FriendProfile extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		// get all username and password value
