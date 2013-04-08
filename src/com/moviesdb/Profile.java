@@ -142,8 +142,7 @@ public class Profile extends HttpServlet {
 				out.println("user name incorrect");
 
 			}
-			out.println("User: " + loggedinemail
-					+ " has logged in successfully");
+			// out.println("User: " + loggedinemail + " has logged in successfully");
 
 		} catch (Exception e) {
 			System.out.println("error in connecting database");
@@ -164,12 +163,12 @@ public class Profile extends HttpServlet {
 		// divider line
 		out.println("</br><hr>");
 		String fullName = getFullName(loggedinemail);
-		out.println("<h2>" + fullName + "'s profile" + "</h2>");
+		out.println("<h1>" + fullName + "'s profile" + "</h1>");
 		out.println("</br>");
 		out.println("</br><hr>");
-		out.println("<h2>" + "Movies watched by " + fullName + "</h2>");
+		out.println("<h2>" + "Movies watched I've watched:</h2>");
 		getMovies(loggedinemail, response);
-		out.println("<h2>" + "Movies rated by " + fullName + "</h2>");
+		out.println("<h2>" + "Movies I've rated:</h2>");
 		getRating(loggedinemail, response);
 		getFriendsList(loggedinemail, response, loggedinpwd);
 		getRecommendation(loggedinemail, response, loggedinpwd);
@@ -308,7 +307,7 @@ public class Profile extends HttpServlet {
 				out.println("<br>");
 				out.println("<tr>");
 				out.println("<td>" + r.getString(1)
-						+ "  ****** the rating is:   " + r.getString(2)
+						+ "  the rating is:   " + r.getString(2)
 						+ "</td>");
 				out.println("<td><form action='moviedetails' method='get' enctype='text/plain'>"
 						+ "<input type='submit' name='mid' value="
@@ -366,7 +365,6 @@ public class Profile extends HttpServlet {
 				out.println("<tr>");
 				out.println("<td>" + r.getString(1) + "</td>");
 				out.println("<td>" + r.getString(2) + "</td>");
-				out.println("<td>" + r.getString(3) + "</td>");
 				out.println("<td><form action='FriendProfile' method='get' enctype='text/plain'>"
 						+ "<input type=\"hidden\" value=\""
 						+ userName
@@ -419,7 +417,8 @@ public class Profile extends HttpServlet {
 
 			ResultSet r = s.executeQuery(query);
 
-			out.println("<h3>Other high rating movies view by my friends(>5.0):</h3>");
+			out.println("<h3>Movie Recommendations:</h3>");
+			out.println("<p>Movies I haven't seen but my friends have rated higher than 5.</p>");
 			out.println("<table border=\"1\">");
 			out.println("<tr>" + "<th>Movie Title</th>"
 					+ "<th>Link to Profile Page</th>" + "</tr>");

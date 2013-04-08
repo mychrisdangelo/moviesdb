@@ -34,6 +34,7 @@ public class FriendProfile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		// get all username and password value
@@ -59,6 +60,7 @@ public class FriendProfile extends HttpServlet {
 		out.print(loggedinpwd);
 		out.print("'><input type='submit' value='back to my profile'></form>");*/
 		
+		out.println("<p align=\"right\">Logged in: " + loggedinemail + "</p>");
 		out.println("</br><hr>");
 		String fullName = getFullName(visitingemail);
 		out.println("<h2>" + fullName + "'s profile" + "</h2>");

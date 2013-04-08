@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<H1>MOVIES DB~</H1>
+<H1>Movies Database</H1>
 
 <h3>By Chris D'Angelo (cd2665@columbia.edu)
    and Xin Du (xd2137@columbia.edu)</h3>
@@ -33,8 +33,8 @@ Or Please register
 Email: <input type='email' name='newemail'>
 Password: <input type='password' name='pwd2'>
 <br>
-FirstName: <input type='email' name='firstName'>
-LastName: <input type='email' name='lastName'>
+FirstName: <input type='text' name='firstName'>
+LastName: <input type='text' name='lastName'>
 <input type='submit' value='Sign-up'>
 </form>
 
