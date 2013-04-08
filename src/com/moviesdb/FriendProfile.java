@@ -52,11 +52,11 @@ public class FriendProfile extends HttpServlet {
 		/*out.print(loggedinemail);
 		out.print(visitingemail);
 		out.print(loggedinpwd);*/
-		out.print("<form name='input' action='profile' method='get'><input type='hidden' name='loggedinemail' value='");
+		/*out.print("<form name='input' action='profile' method='get'><input type='hidden' name='loggedinemail' value='");
 		out.print(loggedinemail);
 		out.print("'><input type='hidden' name='pwd' value='");
 		out.print(loggedinpwd);
-		out.print("'><input type='submit' value='back to my profile'></form>");
+		out.print("'><input type='submit' value='back to my profile'></form>");*/
 		
 		out.println("</br><hr>");
 		String fullName = getFullName(visitingemail);

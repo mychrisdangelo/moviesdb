@@ -22,6 +22,7 @@ import oracle.jdbc.pool.OracleDataSource;
 @WebServlet("/Profile")
 public class Profile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ArrayList<String> filmList;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -39,6 +40,7 @@ public class Profile extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		filmList = new ArrayList<String>();
 		// get all username and password value
 		java.util.Map<String, String[]> submission = request.getParameterMap();
 		String loggedinemail = " ";
@@ -251,18 +253,23 @@ public class Profile extends HttpServlet {
 			ResultSet r = s.executeQuery(query);
 			while (r.next()) {
 				System.out.println(r.getString(1));
-				//movieTitles.add(r.getString(1) + "  " + r.getString(2));
-				//out.println("<br>");
+				filmList.add(r.getString(2));
+				// movieTitles.add(r.getString(1) + "  " + r.getString(2));
+				// out.println("<br>");
 				out.println("<tr>");
-                out.println("<td>" + r.getString(2) + "</td>");
-                out.println("watched on: " + r.getString(3));
-                out.println("<form action='moviedetails' method='get' enctype='text/plain'>" + 
-             		   	   "<input type='submit' name='mid' value=" +
-             		       "'" + r.getString(1) + "'/> " +
-             		   	   "<input type=\"hidden\" value=\"" + userName + "\" name=\"loggedinemail\">" +
-             		       
-             		       "</form>");
-                out.println("</tr>"); 													
+				out.println("<td>" + r.getString(2) + "</td>");
+				out.println("watched on: " + r.getString(3));
+				out.println("<form action='moviedetails' method='get' enctype='text/plain'>"
+						+ "<input type='submit' name='mid' value="
+						+ "'"
+						+ r.getString(1)
+						+ "'/> "
+						+ "<input type=\"hidden\" value=\""
+						+ userName
+						+ "\" name=\"loggedinemail\">" +
+
+						"</form>");
+				out.println("</tr>");
 
 			}
 			r.close();
@@ -273,7 +280,7 @@ public class Profile extends HttpServlet {
 		}
 
 	}
-	
+
 	public void getRating(String userName, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -297,16 +304,21 @@ public class Profile extends HttpServlet {
 					+ userName + "'";
 			ResultSet r = s.executeQuery(query);
 			while (r.next()) {
-				//movieTitles.add(r.getString(1) + "  " + r.getString(2));
+				// movieTitles.add(r.getString(1) + "  " + r.getString(2));
 				out.println("<br>");
 				out.println("<tr>");
-                out.println("<td>" + r.getString(1) + "  ****** the rating is:   " + r.getString(2) + "</td>");
-                out.println("<td><form action='moviedetails' method='get' enctype='text/plain'>" + 
-             		   	   "<input type='submit' name='mid' value=" +
-             		       "'" + r.getString(3) + "'/> " +
-             		   	   "<input type=\"hidden\" value=\"" + userName + "\" name=\"loggedinemail\">" +
-             		       "</form></td>");
-                out.println("</tr>"); 													
+				out.println("<td>" + r.getString(1)
+						+ "  ****** the rating is:   " + r.getString(2)
+						+ "</td>");
+				out.println("<td><form action='moviedetails' method='get' enctype='text/plain'>"
+						+ "<input type='submit' name='mid' value="
+						+ "'"
+						+ r.getString(3)
+						+ "'/> "
+						+ "<input type=\"hidden\" value=\""
+						+ userName
+						+ "\" name=\"loggedinemail\">" + "</form></td>");
+				out.println("</tr>");
 
 			}
 			r.close();
@@ -317,9 +329,9 @@ public class Profile extends HttpServlet {
 		}
 
 	}
-	
-	public void getFriendsList(String userName, HttpServletResponse response, String pwd)
-			throws ServletException, IOException {
+
+	public void getFriendsList(String userName, HttpServletResponse response,
+			String pwd) throws ServletException, IOException {
 
 		String dbUser = "cd2665"; // enter your username here
 		String dbPassword = "movies"; // enter your password here
@@ -337,43 +349,39 @@ public class Profile extends HttpServlet {
 			String query = new String();
 			Statement s = conn.createStatement();
 
-			 query = "SELECT u.firstname, u.lastname, u.email " +
-        			 "FROM users u " +
-        			 "where u.email IN (" +
-            			 "SELECT f.friendsBEmail " +
-            			 "FROM friendswith f " +
-            			 "WHERE f.friendsAEmail = '" + userName + "' " +
-            			 "UNION " +
-	            			 "SELECT f1.friendsAEmail " + 
-	            			 "FROM friendswith f1 " +
-	            			 "WHERE f1.friendsBEmail = '" + userName + "')";
-        	 
-        	 ResultSet r = s.executeQuery(query);
-        	 
-        	 out.println("<h3>My Friends List</h3>");
-        	 out.println("<table border=\"1\">");
-             out.println("<tr>" +
-							"<th>First Name</th>" +
-							"<th>Last Name</th>" +
-							"<th>Link to Profile Page</th>" +
-							"</tr>");
-        	 while(r.next()) {
-                 out.println("<tr>");
-                 out.println("<td>" + r.getString(1) + "</td>");
-                 out.println("<td>" + r.getString(2) + "</td>");
-                 out.println("<td>" + r.getString(3) + "</td>");
-                 out.println("<td><form action='FriendProfile' method='get' enctype='text/plain'>" + 
-                		 "<input type=\"hidden\" value=\"" + userName + "\" name=\"loggedinemail\">" +
-                		 "<input type=\"hidden\" value=\"" + pwd + "\" name=\"password\">" +
-              		   	 "<input type='submit' name='visitingemail' value=" +
-                		 "'" + r.getString(3) + "'/> </form></td>");
-                 out.println("</tr>");   
-             }
-             out.println("</table>");
-             
-             
-             // divider line
-             out.println("</br><hr>");
+			query = "SELECT u.firstname, u.lastname, u.email "
+					+ "FROM users u " + "where u.email IN ("
+					+ "SELECT f.friendsBEmail " + "FROM friendswith f "
+					+ "WHERE f.friendsAEmail = '" + userName + "' " + "UNION "
+					+ "SELECT f1.friendsAEmail " + "FROM friendswith f1 "
+					+ "WHERE f1.friendsBEmail = '" + userName + "')";
+
+			ResultSet r = s.executeQuery(query);
+
+			out.println("<h3>My Friends List</h3>");
+			out.println("<table border=\"1\">");
+			out.println("<tr>" + "<th>First Name</th>" + "<th>Last Name</th>"
+					+ "<th>Link to Profile Page</th>" + "</tr>");
+			while (r.next()) {
+				out.println("<tr>");
+				out.println("<td>" + r.getString(1) + "</td>");
+				out.println("<td>" + r.getString(2) + "</td>");
+				out.println("<td>" + r.getString(3) + "</td>");
+				out.println("<td><form action='FriendProfile' method='get' enctype='text/plain'>"
+						+ "<input type=\"hidden\" value=\""
+						+ userName
+						+ "\" name=\"loggedinemail\">"
+						+ "<input type=\"hidden\" value=\""
+						+ pwd
+						+ "\" name=\"password\">"
+						+ "<input type='submit' name='visitingemail' value="
+						+ "'" + r.getString(3) + "'/> </form></td>");
+				out.println("</tr>");
+			}
+			out.println("</table>");
+
+			// divider line
+			out.println("</br><hr>");
 			r.close();
 			s.close();
 			conn.close();
@@ -382,10 +390,10 @@ public class Profile extends HttpServlet {
 		}
 
 	}
-	
-	
-	public void getRecommendation(String userName, HttpServletResponse response, String pwd)
-			throws ServletException, IOException {
+
+	public void getRecommendation(String userName,
+			HttpServletResponse response, String pwd) throws ServletException,
+			IOException {
 
 		String dbUser = "cd2665"; // enter your username here
 		String dbPassword = "movies"; // enter your password here
@@ -402,34 +410,45 @@ public class Profile extends HttpServlet {
 
 			String query = new String();
 			Statement s = conn.createStatement();
-			
-			query = "select distinct m.title, u.email from users u, rated r, movies m where r.rating > 5.0 and r.email = u.email and r.mid = m.mid and u.email in" +
-			         "(select f.friendsaemail from friendswith f where f.friendsbemail = '"+userName+
-			         "' union select f1.friendsbemail from friendswith f1 where f1.friendsaemail = '" +userName+"' )";
-        	 
-        	 ResultSet r = s.executeQuery(query);
-        	 
-        	 out.println("<h3>Other high rating movies view by my friends(>5.0):</h3>");
-        	 out.println("<table border=\"1\">");
-             out.println("<tr>" +
-							"<th>Movie Title</th>" +
-							"<th>Link to Profile Page</th>" +
-							"</tr>");
-        	 while(r.next()) {
-                 out.println("<tr>");
-                 out.println("<td>" + r.getString(1) + "</td>");
-                 out.println("<td><form action='FriendProfile' method='get' enctype='text/plain'>" + 
-                		 "<input type=\"hidden\" value=\"" + userName + "\" name=\"loggedinemail\">" +
-                		 "<input type=\"hidden\" value=\"" + pwd + "\" name=\"password\">" +
-              		   	 "<input type='submit' name='visitingemail' value=" +
-                		 "'" + r.getString(2) + "'/> </form></td>");
-                 out.println("</tr>");   
-             }
-             out.println("</table>");
-             
-             
-             // divider line
-             out.println("</br><hr>");
+
+			query = "select distinct m.title, u.email from users u, rated r, movies m where r.rating > 5.0 and r.email = u.email and r.mid = m.mid and u.email in"
+					+ "(select f.friendsaemail from friendswith f where f.friendsbemail = '"
+					+ userName
+					+ "' union select f1.friendsbemail from friendswith f1 where f1.friendsaemail = '"
+					+ userName + "' )";
+
+			ResultSet r = s.executeQuery(query);
+
+			out.println("<h3>Other high rating movies view by my friends(>5.0):</h3>");
+			out.println("<table border=\"1\">");
+			out.println("<tr>" + "<th>Movie Title</th>"
+					+ "<th>Link to Profile Page</th>" + "</tr>");
+			while (r.next()) {
+				boolean watched = false;
+				for (String fn : filmList) {
+					if (fn.equals(r.getString(1))) {
+						watched = true;
+					}
+				}
+				if(!watched){
+				out.println("<tr>");
+				out.println("<td>" + r.getString(1) + "</td>");
+				out.println("<td><form action='FriendProfile' method='get' enctype='text/plain'>"
+						+ "<input type=\"hidden\" value=\""
+						+ userName
+						+ "\" name=\"loggedinemail\">"
+						+ "<input type=\"hidden\" value=\""
+						+ pwd
+						+ "\" name=\"password\">"
+						+ "<input type='submit' name='visitingemail' value="
+						+ "'" + r.getString(2) + "'/> </form></td>");
+				out.println("</tr>");
+				}
+			}
+			out.println("</table>");
+
+			// divider line
+			out.println("</br><hr>");
 			r.close();
 			s.close();
 			conn.close();

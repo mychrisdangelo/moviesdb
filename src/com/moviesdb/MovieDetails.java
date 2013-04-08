@@ -40,7 +40,6 @@ public class MovieDetails extends HttpServlet {
          String[] loggedinemail_received = submission.get("loggedinemail");
          String mid = mid_received[0];
          String loggedinemail = loggedinemail_received[0]; // "chris.dangelo@gmail.com"; // TODO = request.getParamater("email");
-      
          String dbUser = "cd2665"; // enter your username here
          String dbPassword = "movies"; // enter your password here
          
@@ -188,7 +187,7 @@ public class MovieDetails extends HttpServlet {
                      out.println("<td>" + r.getString(2) + "</td>");
                      out.println("<td>" + r.getString(4) + "</td>");
                      out.println("<td>" + r.getString(5) + "</td>");
-                     out.println("<td><form action='profile' method='get' enctype='text/plain'>" + 
+                     out.println("<td><form action='FriendProfile' method='get' enctype='text/plain'>" + 
                     		 "<input type=\"hidden\" value=\"" + loggedinemail + "\" name=\"loggedinemail\">" +
                   		   	 "<input type='submit' name='visitingemail' value=" +
                     		 "'" + r.getString(3) + "'/> </form></td>");
