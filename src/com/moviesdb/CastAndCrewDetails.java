@@ -167,7 +167,7 @@ public class CastAndCrewDetails extends HttpServlet {
 	                    out.println("<td>" + r.getString(1) + "</td>");
 	                    out.println("<td>" + r.getString(2) + "</td>");
 	                    out.println("<td>" + r.getString(4) + "</td>");
-	                    out.println("<td><form action='profile' method='get' enctype='text/plain'>" + 
+	                    out.println("<td><form action='FriendProfile' method='get' enctype='text/plain'>" + 
 	                   		 "<input type=\"hidden\" value=\"" + loggedinemail + "\" name=\"loggedinemail\">" +
 	                 		   	 "<input type='submit' name='visitingemail' value=" +
 	                   		 "'" + r.getString(3) + "'/> </form></td>");

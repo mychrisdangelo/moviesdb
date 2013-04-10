@@ -67,9 +67,9 @@ public class FriendProfile extends HttpServlet {
 		out.println("</br>");
 		out.println("</br><hr>");
 		out.println("<h2>" + "Movies watched by " + fullName + "</h2>");
-		getMovies(visitingemail, response);
+		getMovies(visitingemail, loggedinemail, response);
 		out.println("<h2>" + "Movies rated by " + fullName + "</h2>");
-		getRating(visitingemail, response);
+		getRating(visitingemail, loggedinemail, response);
 		/*<form name='input' action='profile' method='get'>
 		<input type='hidden' name='loggedinemail' value='loggedinemail'>
 		<input type='hidden' name='pwd' value='loggedinpwd'>
@@ -121,7 +121,7 @@ public class FriendProfile extends HttpServlet {
 
 	}
 
-	public void getMovies(String userName, HttpServletResponse response)
+	public void getMovies(String userName, String loggedinemail, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String dbUser = "cd2665"; // enter your username here
@@ -153,7 +153,7 @@ public class FriendProfile extends HttpServlet {
                 out.println("<form action='moviedetails' method='get' enctype='text/plain'>" + 
              		   	   "<input type='submit' name='mid' value=" +
              		       "'" + r.getString(1) + "'/> " +
-             		   	   "<input type=\"hidden\" value=\"" + userName + "\" name=\"loggedinemail\">" +
+             		   	   "<input type=\"hidden\" value=\"" + loggedinemail + "\" name=\"loggedinemail\">" +
              		       
              		       "</form>");
                 out.println("</tr>"); 													
@@ -168,7 +168,7 @@ public class FriendProfile extends HttpServlet {
 
 	}
 	
-	public void getRating(String userName, HttpServletResponse response)
+	public void getRating(String userName, String loggedinemail, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String dbUser = "cd2665"; // enter your username here
@@ -198,7 +198,7 @@ public class FriendProfile extends HttpServlet {
                 out.println("<td><form action='moviedetails' method='get' enctype='text/plain'>" + 
              		   	   "<input type='submit' name='mid' value=" +
              		       "'" + r.getString(3) + "'/> " +
-             		   	   "<input type=\"hidden\" value=\"" + userName + "\" name=\"loggedinemail\">" +
+             		   	   "<input type=\"hidden\" value=\"" + loggedinemail + "\" name=\"loggedinemail\">" +
              		       "</form></td>");
                 out.println("</tr>"); 													
 
