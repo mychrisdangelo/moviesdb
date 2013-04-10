@@ -150,8 +150,6 @@ public class Profile extends HttpServlet {
 				out.println("user name incorrect");
 
 			}
-			// out.println("User: " + loggedinemail + " has logged in successfully");
-			out.println("User: " + loggedinemail + " has logged in successfully");
 
 		} catch (Exception e) {
 			System.out.println("error in connecting database");
